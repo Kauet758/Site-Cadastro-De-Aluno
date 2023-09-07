@@ -1,12 +1,18 @@
+from django import forms
+
+
 class AlunoForm(forms.ModelsForm):
+    
     telefone = forms.CharField(widget=forms.TextInput(attrs={'minlenght':'15', 'maxlength':'15', 'onkeyup': 'handlePhone(event)'}))
+    
     data_nascimento = forms.DateField(
         widget=forms.TextInput(
         attrs={'type':'date'}
         )
     )
+    
     class Meta:
-        model =Aluno
+        model = Aluno
         fields = ['nome', 'telefone', 'email', 'data_nascimento', 'description']
    
     def _init_(self, *args, **kwargs):
