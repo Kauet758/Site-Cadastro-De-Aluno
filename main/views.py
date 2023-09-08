@@ -32,3 +32,26 @@ class AlunoCreateView(CreateView):
 
 
 # Create your views here.
+from django.urls import reverse_lazy
+from django.views.generic.edits import CreateView, UpdateView 
+from .forms import AlunoForm
+class AlunoCreateView(CreateView):
+    model = Aluno 
+    form_clss = AlunoForm
+    success_url = reverse_lazy('aluno-lista')
+    template_name = 'main/aluno_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+#*20
+class AlunoUpdateView(UpdateView):
+    model = Aluno
+    form_class = AlunoForm
+    template_name = 'main/aluno_form.html'
+    success_url = reverse_lazy('aluno-lista')
+
+#*20
+
+    
